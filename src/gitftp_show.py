@@ -20,20 +20,17 @@
 
 """
 Usage:
-    git init [URL] [options]
+    git show [URL] [options]
 
 Options:
     -u <user>, --user <user>            Use FTP user instead of $USER.
     -p <password>, --passwd <password>  Use FTP password.
     -P, --ask-passwd                    Ask for FTP password interactivly.
     -s <scope>, --scope <scope>         Use a scope (e.g. dev, prod, testing).
-    -c, --commit                        Set SHA1 hash of last deployed commit.
     -n, --dry-run                       Don't do anything.
     -q, --quiet                         Be silent.
     -v, --verbose                       Be verbosy.
     --active-ftp                        Use FTP active mode.
-    --syncroot <syncroot>               Use a subdirectory to sync from as if it
-                                        were the git project root path.
     --insecure                          Don't verify server's certificate.
     --cacert <file>                     Specify a <file> as CA certificate 
                                         store. Useful using self-signed cert.
@@ -42,7 +39,7 @@ Options:
 from gitftp_common import *
 from docopt import docopt
 
-class GitftpInit(GitftpCommon):
+class GitftpShow(GitftpCommon):
 
     def __init__(self):
         self._args = docopt(__doc__)

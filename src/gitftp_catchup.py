@@ -20,7 +20,7 @@
 
 """
 Usage:
-    git init [URL] [options]
+    git catchup [URL] [options]
 
 Options:
     -u <user>, --user <user>            Use FTP user instead of $USER.
@@ -32,8 +32,6 @@ Options:
     -q, --quiet                         Be silent.
     -v, --verbose                       Be verbosy.
     --active-ftp                        Use FTP active mode.
-    --syncroot <syncroot>               Use a subdirectory to sync from as if it
-                                        were the git project root path.
     --insecure                          Don't verify server's certificate.
     --cacert <file>                     Specify a <file> as CA certificate 
                                         store. Useful using self-signed cert.
@@ -42,7 +40,7 @@ Options:
 from gitftp_common import *
 from docopt import docopt
 
-class GitftpInit(GitftpCommon):
+class GitftpCatchup(GitftpCommon):
 
     def __init__(self):
         self._args = docopt(__doc__)

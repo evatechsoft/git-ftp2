@@ -20,12 +20,14 @@
 
 """
 Usage:
-    git init [URL] [options]
+    git push [URL] [options]
 
 Options:
     -u <user>, --user <user>            Use FTP user instead of $USER.
     -p <password>, --passwd <password>  Use FTP password.
     -P, --ask-passwd                    Ask for FTP password interactivly.
+    -a, --all                           Upload all files and ignore already 
+                                        deployed state.
     -s <scope>, --scope <scope>         Use a scope (e.g. dev, prod, testing).
     -c, --commit                        Set SHA1 hash of last deployed commit.
     -n, --dry-run                       Don't do anything.
@@ -42,7 +44,7 @@ Options:
 from gitftp_common import *
 from docopt import docopt
 
-class GitftpInit(GitftpCommon):
+class GitftpPush(GitftpCommon):
 
     def __init__(self):
         self._args = docopt(__doc__)

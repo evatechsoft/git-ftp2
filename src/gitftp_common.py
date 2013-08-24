@@ -34,8 +34,9 @@ class GitftpCommon(object):
             sys.stderr.write("Fatal: Not a git repository?\n")
             sys.exit(1)
         self._git = self._repo.git
+        self._cloned_git = self._cloned_repo.git
 
-    def _cloneRepoToTmp(self):
+    def cloneRepoToTmp(self):
         import tempfile 
         self._tmpdir = tempfile.mkdtemp()
         self._cloned_repo = self._repo.clone(tmpdir)
@@ -47,16 +48,24 @@ class GitftpCommon(object):
             user = getpass.getuser()
         return user
 
-    def _setRemotes(self):
+
+    def setRemotes(self):
         self._remote_user = self.__getRemoteUser();
         self._remote_passwd = self._getConfig('passwd')
 
 
-    def _checkIsDirty(self):
+    def checkIsDirty(self):
         if self._repo.is_dirty():
             if not self._args['--quiet']:
                 print('Warning: Uncommited changes will be ignored.')
 
+
+    def checkDeployedCommit(self):
+        pass
+
+
+    def setLocalCommit(self):
+        self._local_commit =  self._cloned_git.log(n=1, pretty="format:%H")
 
     def _getConfig(self, value):
         rtrn = ''

@@ -43,6 +43,10 @@ import sys
 import signal
 
 from gitftp_init import *
+from gitftp_push import *
+from gitftp_show import *
+from gitftp_catchup import *
+
 from docopt import (docopt, Option, Argument, Command)
 
 def signal_handler(signal, frame):
@@ -55,26 +59,24 @@ def main():
     args = docopt(__doc__,
         version='git-ftp 2.0.0',
         options_first=True)
-
     if args['init']:
         gf = GitftpInit()
-        gf.run()
+        gf.checkIsDirty()
+        gf.setRemotes
         return
-
     elif args['push']:
         gf = GitftpPush()
-        gf.run()
-
+        gf.checkIsDirty()
+        gf.setRemotes()
+        return
     elif args['show']:
         gf = GitftpShow()
-        gf.run()
+        gf.setRemotes()
         return
-
     elif args['catchup']:
         gf = GitftpCatchup()
-        gf.run()
+        gf.setRemotes()
         return
-
     else:
         exit("%r is not a git-ftp command. See 'git-ftp help'")
 
